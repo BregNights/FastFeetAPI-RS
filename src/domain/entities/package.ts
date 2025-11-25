@@ -13,6 +13,34 @@ interface PackageProps {
 }
 
 export class Package extends Entity<PackageProps> {
+  get trackingCode() {
+    return this.props.trackingCode
+  }
+
+  get description() {
+    return this.props.description
+  }
+
+  get recipientId() {
+    return this.props.recipientId
+  }
+
+  get courierId() {
+    return this.props.courierId
+  }
+
+  get status() {
+    return this.props.status
+  }
+
+  get createdAt() {
+    return this.props.createdAt
+  }
+
+  get updatedAt() {
+    return this.props.updatedAt
+  }
+
   static create(
     props: Optional<PackageProps, "createdAt">,
     id?: UniqueEntityID
@@ -27,18 +55,4 @@ export class Package extends Entity<PackageProps> {
 
     return pkg
   }
-
-
-
-  // get trackingCode() {
-  //   return this.props.trackingCode
-  // }
-
-  // get description() {
-  //   return this.props.description
-  // }
-
-  // get courierId() {
-  //   return this.props.courierId
-  // }
 }

@@ -11,6 +11,26 @@ interface CourierProps {
 }
 
 export class Courier extends Entity<CourierProps> {
+  get name() {
+    return this.props.name
+  }
+
+  get cpf() {
+    return this.props.cpf
+  }
+
+  get email() {
+    return this.props.email
+  }
+
+  get createdAt() {
+    return this.props.createdAt
+  }
+
+  get updatedAt() {
+    return this.props.updatedAt
+  }
+
   static create(
     props: Optional<CourierProps, "createdAt">,
     id?: UniqueEntityID
@@ -25,16 +45,4 @@ export class Courier extends Entity<CourierProps> {
 
     return courier
   }
-
-  get name() {
-    return this.props.name
-  }
-
-  // get cpf() {
-  //   return this.props.cpf
-  // }
-
-  // get email() {
-  //   return this.props.email
-  // }
 }

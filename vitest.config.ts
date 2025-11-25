@@ -1,3 +1,4 @@
+import tsConfigPaths from "vite-tsconfig-paths"
 import { defineConfig } from "vitest/config"
 
 export default defineConfig({
@@ -6,10 +7,10 @@ export default defineConfig({
     root: "./src",
     cache: false,
   },
-  // plugins: [
-  //   tsConfigPaths(),
-  //   swc.vite({
-  //     module: { type: "es6" },
-  //   }),
-  // ],
+  plugins: [
+    tsConfigPaths(),
+    //   swc.vite({
+    //     module: { type: "es6" },
+    //   }),
+  ],
 })

@@ -1,4 +1,3 @@
-import { expect, it } from "vitest"
 import { Courier } from "../entities/courier"
 import { CouriersRepository } from "../repositories/couriers-repository"
 import { RegisterCourierUseCase } from "./register-courier"
