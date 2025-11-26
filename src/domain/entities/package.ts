@@ -56,12 +56,13 @@ export class Package extends Entity<PackageProps> {
   }
 
   static create(
-    props: Optional<PackageProps, "createdAt">,
+    props: Optional<PackageProps, "createdAt" | "status">,
     id?: UniqueEntityID
   ) {
     const pkg = new Package(
       {
         ...props,
+        status: "WAITING",
         createdAt: new Date(),
       },
       id
