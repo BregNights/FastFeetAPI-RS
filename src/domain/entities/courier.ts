@@ -47,7 +47,7 @@ export class Courier extends Entity<CourierProps> {
     const courier = new Courier(
       {
         ...props,
-        createdAt: new Date(),
+        createdAt: props.createdAt ?? new Date(),
       },
       id
     )

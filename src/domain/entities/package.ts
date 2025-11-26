@@ -63,7 +63,7 @@ export class Package extends Entity<PackageProps> {
       {
         ...props,
         status: "WAITING",
-        createdAt: new Date(),
+        createdAt: props.createdAt ?? new Date(),
       },
       id
     )

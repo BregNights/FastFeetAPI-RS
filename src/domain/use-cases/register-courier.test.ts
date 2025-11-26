@@ -1,21 +1,22 @@
-import { Courier } from "../entities/courier"
-import { CouriersRepository } from "../repositories/couriers-repository"
+import { InMemoryCouriersRepository } from "test/repositories/in-memory-couriers-repository"
 import { RegisterCourierUseCase } from "./register-courier"
 
-const fakeCouriersRepository: CouriersRepository = {
-  create: async (courier: Courier) => {
-    return
-  },
-}
+let inMemoryCouriersRepository: InMemoryCouriersRepository
+let sut: RegisterCourierUseCase
 
-it("Register an courier", async () => {
-  const registerCourier = new RegisterCourierUseCase(fakeCouriersRepository)
-
-  const courier = await registerCourier.execute({
-    name: "example",
-    cpf: "123;456;789-00",
-    email: "example@example.com",
+describe("Create Courier", () => {
+  beforeEach(() => {
+    inMemoryCouriersRepository = new InMemoryCouriersRepository()
+    sut = new RegisterCourierUseCase(inMemoryCouriersRepository)
   })
 
-  expect(courier.name).toEqual("example")
+  it("sliuld be able register a courier", async () => {
+    const result = await sut.execute({
+      name: "example",
+      cpf: "123;456;789-00",
+      email: "example@example.com",
+    })
+
+    expect(result.courier.name).toEqual("example")
+  })
 })

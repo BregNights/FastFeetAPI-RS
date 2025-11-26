@@ -1,6 +1,6 @@
 import { UniqueEntityID } from "@/core/entities/unique-entity-id"
 import { Package } from "../entities/package"
-import { PackageRepository } from "../repositories/packages-repository"
+import { PackagesRepository } from "../repositories/packages-repository"
 
 interface RegisterPackageUseCaseRequest {
   trackingCode: string
@@ -9,24 +9,28 @@ interface RegisterPackageUseCaseRequest {
   courierId: string
 }
 
+interface RegisterPackageUseCaseResponse {
+  pkg: Package
+}
+
 export class RegisterPackageUseCase {
-  constructor(private packageRepository: PackageRepository) {}
+  constructor(private packagesRepository: PackagesRepository) {}
 
   async execute({
     trackingCode,
     description,
     recipientId,
     courierId,
-  }: RegisterPackageUseCaseRequest) {
-    const pkg = await Package.create({
+  }: RegisterPackageUseCaseRequest): Promise<RegisterPackageUseCaseResponse> {
+    const pkg = Package.create({
       trackingCode,
       description,
       recipientId: new UniqueEntityID(recipientId),
       courierId: new UniqueEntityID(courierId),
     })
 
-    await this.packageRepository.create(pkg)
+    await this.packagesRepository.create(pkg)
 
-    return pkg
+    return { pkg }
   }
 }

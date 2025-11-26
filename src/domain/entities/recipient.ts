@@ -5,7 +5,7 @@ import { Optional } from "@/core/types/optional"
 interface RecipientProps {
   name: string
   cpf: string
-  phone?: string |null
+  phone?: string | null
   email?: string | null
   address: string
   latitude: number
@@ -68,7 +68,7 @@ export class Recipient extends Entity<RecipientProps> {
     const recipient = new Recipient(
       {
         ...props,
-        createdAt: new Date(),
+        createdAt: props.createdAt ?? new Date(),
       },
       id
     )
