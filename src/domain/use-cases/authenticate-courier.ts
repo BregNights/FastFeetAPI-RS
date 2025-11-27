@@ -34,6 +34,8 @@ export class AuthenticateCourierUseCase {
       return left(new WrongCredentialsError())
     }
 
+    console.log(password, courier.password)
+
     const isPassworldValid = await this.hashComparer.compare(
       password,
       courier.password

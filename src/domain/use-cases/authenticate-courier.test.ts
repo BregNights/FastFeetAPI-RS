@@ -20,6 +20,7 @@ describe("Authenticate Courier Use Case", () => {
       fakeEncrypter
     )
   })
+
   it("should be able to authenticate a courier", async () => {
     const courier = makeCourier({
       email: "johndoe@example.com",
@@ -27,8 +28,6 @@ describe("Authenticate Courier Use Case", () => {
     })
 
     inMemoryCouriersRepository.items.push(courier)
-
-    console.log(inMemoryCouriersRepository.items)
 
     const result = await sut.execute({
       email: "johndoe@example.com",
