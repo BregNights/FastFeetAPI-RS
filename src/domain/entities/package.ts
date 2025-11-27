@@ -1,13 +1,14 @@
 import { Entity } from "@/core/entities/entity"
 import { UniqueEntityID } from "@/core/entities/unique-entity-id"
 import { Optional } from "@/core/types/optional"
+import { PackageStatus } from "./expedition"
 
 interface PackageProps {
   trackingCode: string
   description: string
   recipientId: UniqueEntityID
   courierId: UniqueEntityID
-  status: string
+  status: PackageStatus
   createdAt: Date
   updatedAt?: Date | null
 }
@@ -38,9 +39,11 @@ export class Package extends Entity<PackageProps> {
     return this.props.status
   }
 
-  set status(status: string) {
-    this.props.status = status
-    this.touch()
+  set status(status: PackageStatus) {
+    if (this.props.status !== status) {
+      this.props.status = status
+      this.touch()
+    }
   }
 
   get createdAt() {
@@ -62,7 +65,7 @@ export class Package extends Entity<PackageProps> {
     const pkg = new Package(
       {
         ...props,
-        status: "WAITING",
+        status: props.status ?? PackageStatus.WAITING,
         createdAt: props.createdAt ?? new Date(),
       },
       id
