@@ -28,8 +28,6 @@ describe("Get Package", () => {
       packageId: pkg.id.toString(),
     })
 
-    console.log(result.value)
-
     expect(result.isRight()).toBe(true)
     expect(result.value).toMatchObject({
       pkg: expect.objectContaining({
