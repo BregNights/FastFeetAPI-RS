@@ -34,6 +34,12 @@ export class InMemoryRecipientsRepository implements RecipientsRepository {
     return recipient || null
   }
 
+  async findManyRecipients(page: number): Promise<Recipient[]> {
+    const recipient = this.items.slice((page - 1) * 20, page * 20)
+
+    return recipient
+  }
+
   async save(recipient: Recipient): Promise<void> {
     const itemIndex = this.items.findIndex((item) => item.id === recipient.id)
 
