@@ -21,25 +21,6 @@ describe("Authenticate Courier Use Case", () => {
     )
   })
 
-  it("should be able to authenticate a courier with email", async () => {
-    const courier = makeCourier({
-      email: "johndoe@example.com",
-      password: await fakeHasher.hash("123456"),
-    })
-
-    inMemoryCouriersRepository.items.push(courier)
-
-    const result = await sut.execute({
-      email: "johndoe@example.com",
-      password: "123456",
-    })
-
-    expect(result.isRight()).toBe(true)
-    expect(result.value).toEqual({
-      accessToken: expect.any(String),
-    })
-  })
-
   it("should be able to authenticate a courier with cpf", async () => {
     const courier = makeCourier({
       cpf: "123.456.789-80",
@@ -49,7 +30,7 @@ describe("Authenticate Courier Use Case", () => {
     inMemoryCouriersRepository.items.push(courier)
 
     const result = await sut.execute({
-      cpf: "123.456.789-80",
+      cpf: courier.cpf,
       password: "123456",
     })
 

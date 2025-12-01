@@ -1,19 +1,13 @@
 import { Either, left, right } from "@/core/either"
-import { Courier } from "../../enterprise/entities/courier"
 import { Encrypter } from "../cryptography/encrypter"
 import { HashComparer } from "../cryptography/hash-comparer"
 import { CouriersRepository } from "../repositories/couriers-repository"
 import { WrongCredentialsError } from "./errors/wrong-credentials-error"
 
-type AuthenticateCourierUseCaseRequest =
-  | {
-      email: string
-      password: string
-    }
-  | {
-      cpf: string
-      password: string
-    }
+type AuthenticateCourierUseCaseRequest = {
+  cpf: string
+  password: string
+}
 
 type AuthenticateCourierUseCaseResponse = Either<
   WrongCredentialsError,
@@ -29,23 +23,16 @@ export class AuthenticateCourierUseCase {
     private encrypter: Encrypter
   ) {}
 
-  async execute(
-    request: AuthenticateCourierUseCaseRequest
-  ): Promise<AuthenticateCourierUseCaseResponse> {
-    let courier: Courier | null = null
-
-    if ("email" in request) {
-      courier = await this.couriersRepository.findByEmail(request.email)
-    }
-
-    if ("cpf" in request) {
-      courier = await this.couriersRepository.findByCPF(request.cpf)
-    }
+  async execute({
+    cpf,
+    password,
+  }: AuthenticateCourierUseCaseRequest): Promise<AuthenticateCourierUseCaseResponse> {
+    const courier = await this.couriersRepository.findByCPF(cpf)
 
     if (!courier) return left(new WrongCredentialsError())
 
     const isPasswordValid = await this.hashComparer.compare(
-      request.password,
+      password,
       courier.password
     )
 
@@ -53,6 +40,7 @@ export class AuthenticateCourierUseCase {
 
     const accessToken = await this.encrypter.encrypt({
       sub: courier.id.toString(),
+      role: "COURIER",
     })
 
     return right({ accessToken })
