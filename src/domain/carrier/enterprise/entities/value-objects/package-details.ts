@@ -6,6 +6,7 @@ export interface PackageDetailsProps {
   trackingCode: string
   description: string
   status: string
+  recipientId: UniqueEntityID
   recipientName: string
   recipientPhone?: string | null
   recipientAddress: string
@@ -28,6 +29,10 @@ export class PackageDetails extends ValueObject<PackageDetailsProps> {
 
   get status() {
     return this.props.status
+  }
+
+  get recipientId() {
+    return this.props.recipientId
   }
 
   get recipientName() {

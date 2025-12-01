@@ -1,3 +1,4 @@
+import { DomainEvents } from "@/core/events/domain-events"
 import { PackagesRepository } from "@/domain/carrier/application/repositories/packages-repository"
 import { Package } from "@/domain/carrier/enterprise/entities/package"
 import { PackageDetails } from "@/domain/carrier/enterprise/entities/value-objects/package-details"
@@ -10,6 +11,8 @@ export class InMemoryPackagesRepository implements PackagesRepository {
 
   async create(pkg: Package): Promise<void> {
     this.items.push(pkg)
+
+    DomainEvents.dispatchEventsForAggregate(pkg.id)
   }
 
   async findById(id: string): Promise<Package | null> {
@@ -39,6 +42,7 @@ export class InMemoryPackagesRepository implements PackagesRepository {
       description: pkg.description,
       status: pkg.status,
 
+      recipientId: recipient.id,
       recipientAddress: recipient.address,
       recipientName: recipient.name,
       recipientPhone: recipient.phone,
@@ -58,5 +62,7 @@ export class InMemoryPackagesRepository implements PackagesRepository {
     const itemIndex = this.items.findIndex((item) => item.id === pkg.id)
 
     this.items[itemIndex] = pkg
+
+    DomainEvents.dispatchEventsForAggregate(pkg.id)
   }
 }

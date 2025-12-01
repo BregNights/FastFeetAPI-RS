@@ -1,6 +1,7 @@
 import { AggregateRoot } from "@/core/entities/aggregate-root"
 import { UniqueEntityID } from "@/core/entities/unique-entity-id"
 import { Optional } from "@/core/types/optional"
+import { PackageStatusEvent } from "../events/package-status-event"
 
 export enum PackageStatus {
   WAITING = "WAITING",
@@ -50,6 +51,10 @@ export class Package extends AggregateRoot<PackageProps> {
     this.updateProp(this.props.status, status, () => {
       this.props.status = status
     })
+
+    if (status) {
+      this.addDomainEvent(new PackageStatusEvent(this, status))
+    }
   }
 
   get createdAt() {
@@ -83,6 +88,11 @@ export class Package extends AggregateRoot<PackageProps> {
       },
       id
     )
+
+    const isNewStatus = !id
+    if (isNewStatus) {
+      pkg.addDomainEvent(new PackageStatusEvent(pkg, pkg.status))
+    }
 
     return pkg
   }
