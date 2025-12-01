@@ -19,6 +19,12 @@ export class Recipient extends Entity<RecipientProps> {
     return this.props.name
   }
 
+  set name(name: string) {
+    this.updateProp(this.props.name, name, () => {
+      this.props.name = name
+    })
+  }
+
   get cpf() {
     return this.props.cpf
   }
@@ -27,20 +33,50 @@ export class Recipient extends Entity<RecipientProps> {
     return this.props.phone
   }
 
+  set phone(phone: string | null | undefined) {
+    this.updateProp(this.props.phone, phone, () => {
+      this.props.phone = phone
+    })
+  }
+
   get email() {
     return this.props.email
+  }
+
+  set email(email: string | null | undefined) {
+    this.updateProp(this.props.email, email, () => {
+      this.props.email = email
+    })
   }
 
   get address() {
     return this.props.address
   }
 
+  set address(address: string) {
+    this.updateProp(this.props.address, address, () => {
+      this.props.address = address
+    })
+  }
+
   get latitude() {
     return this.props.latitude
   }
 
+  set latitude(latitude: number) {
+    this.updateProp(this.props.latitude, latitude, () => {
+      this.props.latitude = latitude
+    })
+  }
+
   get longitude() {
     return this.props.longitude
+  }
+
+  set longitude(longitude: number) {
+    this.updateProp(this.props.longitude, longitude, () => {
+      this.props.longitude = longitude
+    })
   }
 
   get createdAt() {
@@ -49,6 +85,17 @@ export class Recipient extends Entity<RecipientProps> {
 
   get updatedAt() {
     return this.props.updatedAt
+  }
+
+  private touch() {
+    this.props.updatedAt = new Date()
+  }
+
+  private updateProp<T>(current: T, next: T, assign: () => void) {
+    if (current !== next) {
+      assign()
+      this.touch()
+    }
   }
 
   static create(

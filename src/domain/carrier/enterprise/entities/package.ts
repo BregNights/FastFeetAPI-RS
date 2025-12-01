@@ -1,7 +1,13 @@
 import { Entity } from "@/core/entities/entity"
 import { UniqueEntityID } from "@/core/entities/unique-entity-id"
 import { Optional } from "@/core/types/optional"
-import { PackageStatus } from "./expedition"
+
+export enum PackageStatus {
+  WAITING = "WAITING",
+  PICKED_UP = "PICKED_UP",
+  DELIVERED = "DELIVERED",
+  RETURNED = "RETURNED",
+}
 
 export interface PackageProps {
   trackingCode: string
@@ -23,8 +29,9 @@ export class Package extends Entity<PackageProps> {
   }
 
   set description(description: string) {
-    this.props.description = description
-    this.touch()
+    this.updateProp(this.props.description, description, () => {
+      this.props.description = description
+    })
   }
 
   get recipientId() {
@@ -40,10 +47,9 @@ export class Package extends Entity<PackageProps> {
   }
 
   set status(status: PackageStatus) {
-    if (this.props.status !== status) {
+    this.updateProp(this.props.status, status, () => {
       this.props.status = status
-      this.touch()
-    }
+    })
   }
 
   get createdAt() {
@@ -56,6 +62,13 @@ export class Package extends Entity<PackageProps> {
 
   private touch() {
     this.props.updatedAt = new Date()
+  }
+
+  private updateProp<T>(current: T, next: T, assign: () => void) {
+    if (current !== next) {
+      assign()
+      this.touch()
+    }
   }
 
   static create(

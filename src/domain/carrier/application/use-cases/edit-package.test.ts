@@ -1,7 +1,8 @@
 import { makePackage } from "test/factories/make-package"
 import { InMemoryPackagesRepository } from "test/repositories/in-memory-packages-repository"
 import { InMemoryRecipientsRepository } from "test/repositories/in-memory-recipients-repository"
-import { PackageStatus } from "../../enterprise/entities/expedition"
+
+import { PackageStatus } from "../../enterprise/entities/package"
 import { EditPackageUseCase } from "./edit-package"
 
 let inMemoryPackagesRepository: InMemoryPackagesRepository

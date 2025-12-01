@@ -17,8 +17,9 @@ export class Courier extends Entity<CourierProps> {
   }
 
   set name(name: string) {
-    this.props.name = name
-    this.touch()
+    this.updateProp(this.props.name, name, () => {
+      this.props.name = name
+    })
   }
 
   get cpf() {
@@ -30,8 +31,9 @@ export class Courier extends Entity<CourierProps> {
   }
 
   set email(email: string) {
-    this.props.email = email
-    this.touch()
+    this.updateProp(this.props.email, email, () => {
+      this.props.email = email
+    })
   }
 
   get password() {
@@ -39,8 +41,9 @@ export class Courier extends Entity<CourierProps> {
   }
 
   set password(password: string) {
-    this.props.password = password
-    this.touch()
+    this.updateProp(this.props.password, password, () => {
+      this.props.password = password
+    })
   }
 
   get createdAt() {
@@ -53,6 +56,13 @@ export class Courier extends Entity<CourierProps> {
 
   private touch() {
     this.props.updatedAt = new Date()
+  }
+
+  private updateProp<T>(current: T, next: T, assign: () => void) {
+    if (current !== next) {
+      assign()
+      this.touch()
+    }
   }
 
   static create(
