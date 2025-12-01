@@ -98,6 +98,15 @@ export class Recipient extends Entity<RecipientProps> {
     }
   }
 
+  update(data: Partial<RecipientProps>) {
+    if (data.name) this.name = data.name
+    if (data.phone) this.phone = data.phone
+    if (data.email) this.email = data.email
+    if (data.address) this.address = data.address
+    if (data.latitude) this.latitude = data.latitude
+    if (data.longitude) this.longitude = data.longitude
+  }
+
   static create(
     props: Optional<RecipientProps, "createdAt">,
     id?: UniqueEntityID

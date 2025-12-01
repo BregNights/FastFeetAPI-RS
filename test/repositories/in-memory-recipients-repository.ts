@@ -27,4 +27,16 @@ export class InMemoryRecipientsRepository implements RecipientsRepository {
       return distance < MAX_DISTANCE_RECIPIENTS_IN_KILOMITERS
     })
   }
+
+  async findById(id: string): Promise<Recipient | null> {
+    const recipient = this.items.find((item) => item.id.toString() === id)
+
+    return recipient || null
+  }
+
+  async save(recipient: Recipient): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.id === recipient.id)
+
+    this.items[itemIndex] = recipient
+  }
 }
