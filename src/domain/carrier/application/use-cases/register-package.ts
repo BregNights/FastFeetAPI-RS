@@ -1,5 +1,6 @@
 import { Either, right } from "@/core/either"
 import { UniqueEntityID } from "@/core/entities/unique-entity-id"
+import { Injectable } from "@nestjs/common"
 import { Package } from "../../enterprise/entities/package"
 import { PackagesRepository } from "../repositories/packages-repository"
 
@@ -17,6 +18,7 @@ type RegisterPackageUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class RegisterPackageUseCase {
   constructor(private packagesRepository: PackagesRepository) {}
 

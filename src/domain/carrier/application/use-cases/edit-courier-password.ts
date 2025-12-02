@@ -1,5 +1,6 @@
 import { Either, left, right } from "@/core/either"
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found-error"
+import { Injectable } from "@nestjs/common"
 import { Courier } from "../../enterprise/entities/courier"
 import { HashGenerator } from "../cryptography/hash-generator"
 import { CouriersRepository } from "../repositories/couriers-repository"
@@ -16,6 +17,7 @@ type EditCourierUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class EditCourierPasswordUseCase {
   constructor(
     private couriersRepository: CouriersRepository,
