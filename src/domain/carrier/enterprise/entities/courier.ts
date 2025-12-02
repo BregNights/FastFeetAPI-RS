@@ -2,11 +2,17 @@ import { AggregateRoot } from "@/core/entities/aggregate-root"
 import { UniqueEntityID } from "@/core/entities/unique-entity-id"
 import { Optional } from "@/core/types/optional"
 
+export enum CourierRole {
+  ADMIN = "ADMIN",
+  COURIER = "COURIER",
+}
+
 export interface CourierProps {
   name: string
   cpf: string
   email: string
   password: string
+  role: CourierRole
   createdAt: Date
   updatedAt?: Date | null
 }
@@ -46,6 +52,10 @@ export class Courier extends AggregateRoot<CourierProps> {
     })
   }
 
+  get role() {
+    return this.props.role
+  }
+
   get createdAt() {
     return this.props.createdAt
   }
@@ -66,12 +76,13 @@ export class Courier extends AggregateRoot<CourierProps> {
   }
 
   static create(
-    props: Optional<CourierProps, "createdAt">,
+    props: Optional<CourierProps, "role" | "createdAt">,
     id?: UniqueEntityID
   ) {
     const courier = new Courier(
       {
         ...props,
+        role: props.role ?? CourierRole.COURIER,
         createdAt: props.createdAt ?? new Date(),
       },
       id
