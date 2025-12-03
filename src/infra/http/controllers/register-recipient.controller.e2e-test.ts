@@ -47,9 +47,9 @@ describe("Create recipient (E2E)", () => {
 
     expect(response.statusCode).toBe(201)
 
-    const recipientOnDatabase = await prisma.recipient.findUnique({
+    const recipientOnDatabase = await prisma.recipient.findFirst({
       where: {
-        cpf: "123.456.789-00",
+        id: response.body.id,
       },
     })
 

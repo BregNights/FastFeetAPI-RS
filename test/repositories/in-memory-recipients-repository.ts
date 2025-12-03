@@ -34,6 +34,12 @@ export class InMemoryRecipientsRepository implements RecipientsRepository {
     return recipient || null
   }
 
+  async findByCPF(cpf: string): Promise<Recipient | null> {
+    const recipient = this.items.find((item) => item.id.toString() === cpf)
+
+    return recipient || null
+  }
+
   async findManyRecipients(page: number): Promise<Recipient[]> {
     const recipient = this.items.slice((page - 1) * 20, page * 20)
 

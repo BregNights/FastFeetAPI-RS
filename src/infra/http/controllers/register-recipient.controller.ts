@@ -11,6 +11,7 @@ import {
   UsePipes,
 } from "@nestjs/common"
 import { z } from "zod"
+import { RecipientPresenter } from "../presenters/recipient-presenter"
 
 const registerRecipientBodySchema = z.object({
   name: z.string(),
@@ -45,7 +46,10 @@ export class RegisterRecipientController {
     })
 
     if (result.isLeft()) {
-      throw new BadRequestException()
+      const error = result.value
+      throw new BadRequestException(error.message)
     }
+
+    return { recipient: RecipientPresenter.toHTTP(result.value.recipient) }
   }
 }

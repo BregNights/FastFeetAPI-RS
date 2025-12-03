@@ -23,6 +23,12 @@ export class PrismaRecipientsRepository implements RecipientsRepository {
     return recipient ? PrismaRecipientMapper.toDomain(recipient) : null
   }
 
+  async findByCPF(cpf: string): Promise<Recipient | null> {
+    const recipient = await this.prisma.recipient.findUnique({ where: { cpf } })
+
+    return recipient ? PrismaRecipientMapper.toDomain(recipient) : null
+  }
+
   async findManyNearby({
     latitude,
     longitude,

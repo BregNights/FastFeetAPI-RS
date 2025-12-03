@@ -49,6 +49,6 @@ export class RegisterPackageController {
       throw new BadRequestException()
     }
 
-    return PackagePresenter.toHTTP(result.value.pkg)
+    return { package: PackagePresenter.toHTTP(result.value.pkg) }
   }
 }
