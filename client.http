@@ -53,3 +53,12 @@ Authorization: Bearer {{authToken}}
 }
 
 ###
+
+# @name delete_courier
+DELETE {{baseUrl}}/accounts/0b34ac02-4c0c-44f9-a7f2-ced2e52e01d8
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{}
+
+###
