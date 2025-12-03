@@ -7,4 +7,5 @@ export abstract class CouriersRepository {
   abstract findById(id: string): Promise<Courier | null>
   abstract findManyCouriers(page: number): Promise<Courier[]>
   abstract save(courier: Courier): Promise<void>
+  abstract delete(courier: Courier): Promise<void>
 }

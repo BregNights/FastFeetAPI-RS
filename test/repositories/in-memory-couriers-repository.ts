@@ -37,4 +37,10 @@ export class InMemoryCouriersRepository implements CouriersRepository {
 
     this.items[itemIndex] = courier
   }
+
+  async delete(courier: Courier): Promise<void> {
+      const itemIndex = this.items.findIndex((item) => item.id === courier.id)
+  
+      this.items.splice(itemIndex, 1)
+    }
 }

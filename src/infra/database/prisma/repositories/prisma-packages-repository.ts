@@ -45,4 +45,10 @@ export class PrismaPackagesRepository implements PackagesRepository {
 
     await this.prisma.package.update({ where: { id: data.id }, data })
   }
+
+  async delete(pkg: Package): Promise<void> {
+    const data = PrismaPackageMapper.toPrisma(pkg)
+
+    await this.prisma.recipient.delete({ where: { id: data.id } })
+  }
 }

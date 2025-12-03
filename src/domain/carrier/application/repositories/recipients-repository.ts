@@ -12,4 +12,5 @@ export abstract class RecipientsRepository {
   abstract findManyNearby(params: FindManyNearbyParams): Promise<Recipient[]>
   abstract findManyRecipients(page: number): Promise<Recipient[]>
   abstract save(recipient: Recipient): Promise<void>
+  abstract delete(recipient: Recipient): Promise<void>
 }

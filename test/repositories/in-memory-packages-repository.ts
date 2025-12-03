@@ -65,4 +65,10 @@ export class InMemoryPackagesRepository implements PackagesRepository {
 
     DomainEvents.dispatchEventsForAggregate(pkg.id)
   }
+
+  async delete(pkg: Package): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.id === pkg.id)
+
+    this.items.splice(itemIndex, 1)
+  }
 }
