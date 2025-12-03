@@ -44,11 +44,6 @@ export class RegisterPackageController {
       recipientId,
     })
 
-    console.log("recipientId:", recipientId)
-    console.log("body:", body)
-    console.log("courierId:", courierId)
-    console.log(result)
-
     if (result.isLeft()) {
       throw new BadRequestException()
     }
