@@ -76,13 +76,27 @@ export class Package extends AggregateRoot<PackageProps> {
     }
   }
 
+  private static generateTrackingCode(): string {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const prefix =
+      letters[Math.floor(Math.random() * letters.length)] +
+      letters[Math.floor(Math.random() * letters.length)]
+
+    const numbers = Math.floor(100000000 + Math.random() * 900000000)
+
+    const suffix = "BR"
+
+    return `${prefix}${numbers}${suffix}`
+  }
+
   static create(
-    props: Optional<PackageProps, "createdAt" | "status">,
+    props: Optional<PackageProps, "createdAt" | "status" | "trackingCode">,
     id?: UniqueEntityID
   ) {
     const pkg = new Package(
       {
         ...props,
+        trackingCode: props.trackingCode ?? Package.generateTrackingCode(),
         status: props.status ?? PackageStatus.WAITING,
         createdAt: props.createdAt ?? new Date(),
       },

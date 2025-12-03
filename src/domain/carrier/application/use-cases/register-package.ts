@@ -5,7 +5,6 @@ import { Package } from "../../enterprise/entities/package"
 import { PackagesRepository } from "../repositories/packages-repository"
 
 interface RegisterPackageUseCaseRequest {
-  trackingCode: string
   description: string
   recipientId: string
   courierId: string
@@ -23,13 +22,11 @@ export class RegisterPackageUseCase {
   constructor(private packagesRepository: PackagesRepository) {}
 
   async execute({
-    trackingCode,
     description,
     recipientId,
     courierId,
   }: RegisterPackageUseCaseRequest): Promise<RegisterPackageUseCaseResponse> {
     const pkg = Package.create({
-      trackingCode,
       description,
       recipientId: new UniqueEntityID(recipientId),
       courierId: new UniqueEntityID(courierId),

@@ -11,6 +11,8 @@ export class PrismaCourierMapper {
         cpf: raw.cpf,
         role: raw.role as Role,
         password: raw.password,
+        createdAt: raw.createdAt,
+        updatedAt: raw.updatedAt,
       },
       new UniqueEntityID(raw.id)
     )
@@ -24,6 +26,8 @@ export class PrismaCourierMapper {
       cpf: courier.cpf,
       role: courier.role,
       password: courier.password,
+      createdAt: courier.createdAt,
+      updatedAt: courier.updatedAt,
     }
   }
 }

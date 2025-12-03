@@ -6,7 +6,7 @@ import { JwtService } from "@nestjs/jwt"
 import { Test } from "@nestjs/testing"
 import request from "supertest"
 import { CourierFactory } from "test/factories/make-courier"
-import { DatabaseModule } from "../database/database.module"
+import { DatabaseModule } from "../../database/database.module"
 
 describe("Create recipient (E2E)", () => {
   let app: INestApplication
@@ -47,12 +47,12 @@ describe("Create recipient (E2E)", () => {
 
     expect(response.statusCode).toBe(201)
 
-    const userOnDatabase = await prisma.recipient.findUnique({
+    const recipientOnDatabase = await prisma.recipient.findUnique({
       where: {
         cpf: "123.456.789-00",
       },
     })
 
-    expect(userOnDatabase).toBeTruthy()
+    expect(recipientOnDatabase).toBeTruthy()
   })
 })

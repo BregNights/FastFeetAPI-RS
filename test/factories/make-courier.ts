@@ -3,8 +3,8 @@ import {
   Courier,
   CourierProps,
 } from "@/domain/carrier/enterprise/entities/courier"
+import { PrismaCourierMapper } from "@/infra/database/prisma/mappers/prisma-courier-mapper"
 import { PrismaService } from "@/infra/database/prisma/prisma.service"
-import { PrismaCourierMapper } from "@/infra/http/database/prisma/mappers/prisma-courier-mapper"
 import { faker } from "@faker-js/faker"
 import { Injectable } from "@nestjs/common"
 

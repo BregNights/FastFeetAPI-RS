@@ -1,4 +1,3 @@
-import { randomUUID } from "node:crypto"
 import { InMemoryPackagesRepository } from "test/repositories/in-memory-packages-repository"
 import { InMemoryRecipientsRepository } from "test/repositories/in-memory-recipients-repository"
 import { RegisterPackageUseCase } from "./register-package"
@@ -21,7 +20,6 @@ describe("Create Package", () => {
       courierId: "1",
       description: "Package",
       recipientId: "2",
-      trackingCode: randomUUID(),
     })
 
     expect(result.isRight()).toBe(true)

@@ -4,7 +4,7 @@ import { ValueObject } from "@/core/entities/value-object"
 export interface PackageDetailsProps {
   packageId: UniqueEntityID
   trackingCode: string
-  description: string
+  description?: string | null
   status: string
   recipientId: UniqueEntityID
   recipientName: string

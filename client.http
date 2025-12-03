@@ -20,7 +20,7 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "cpf":"123.456.789-02",
+    "cpf":"123.456.789-01",
     "password": "123456"
 }
 
@@ -29,10 +29,11 @@ Content-Type: application/json
 # @name create_recipient
 POST {{baseUrl}}/recipients
 Content-Type: application/json
+Authorization: Bearer {{authToken}}
 
 {
     "name": "John Doe",
-    "cpf": "123.456.789-00",
+    "cpf": "123.456.789-01",
     "phone": "4799999-9999",
     "email": "johndoe@example.com",
     "address": "Address example",
@@ -43,11 +44,12 @@ Content-Type: application/json
 ###
 
 # @name create_package
-POST {{baseUrl}}/packages
+POST {{baseUrl}}/packages/cdeae263-ce37-4577-90c0-a33dbe47f4ed
 Content-Type: application/json
+Authorization: Bearer {{authToken}}
 
 {
-    
+    "description": "description"
 }
 
 ###

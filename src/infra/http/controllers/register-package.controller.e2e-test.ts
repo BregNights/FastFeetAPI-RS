@@ -6,50 +6,53 @@ import { JwtService } from "@nestjs/jwt"
 import { Test } from "@nestjs/testing"
 import request from "supertest"
 import { CourierFactory } from "test/factories/make-courier"
+import { RecipientFactory } from "test/factories/make-recipient"
 import { DatabaseModule } from "../../database/database.module"
 
-describe("Create account (E2E)", () => {
+describe("Create package (E2E)", () => {
   let app: INestApplication
   let prisma: PrismaService
   let courierFactory: CourierFactory
+  let recipientFactory: RecipientFactory
   let jwt: JwtService
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [CourierFactory],
+      providers: [CourierFactory, RecipientFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
     prisma = moduleRef.get(PrismaService)
     courierFactory = moduleRef.get(CourierFactory)
+    recipientFactory = moduleRef.get(RecipientFactory)
     jwt = moduleRef.get(JwtService)
 
     await app.init()
   })
 
-  it("[POST] /accounts", async () => {
+  it("[POST] /packages", async () => {
     const user = await courierFactory.makePrismaCourier()
     const accessToken = jwt.sign({ sub: user.id.toString(), role: Role.ADMIN })
 
+    const recipient = await recipientFactory.makePrismaRecipient({})
+    const recipientId = recipient.id.toString()
+
     const response = await request(app.getHttpServer())
-      .post("/accounts")
+      .post(`/packages/${recipientId}`)
       .set("Authorization", `Bearer ${accessToken}`)
       .send({
-        name: "John Doe",
-        email: "johndoe@example.com",
-        cpf: "123.456.789-00",
-        password: "123456",
+        description: "Description",
       })
 
     expect(response.statusCode).toBe(201)
 
-    const userOnDatabase = await prisma.user.findUnique({
+    const packageOnDatabase = await prisma.package.findFirst({
       where: {
-        email: "johndoe@example.com",
+        description: "Description",
       },
     })
 
-    expect(userOnDatabase).toBeTruthy()
+    expect(packageOnDatabase).toBeTruthy()
   })
 })

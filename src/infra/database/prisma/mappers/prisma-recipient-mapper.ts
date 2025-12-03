@@ -13,6 +13,8 @@ export class PrismaRecipientMapper {
         address: raw.address,
         latitude: raw.latitude ?? 0,
         longitude: raw.longitude ?? 0,
+        createdAt: raw.createdAt,
+        updatedAt: raw.updatedAt,
       },
       new UniqueEntityID(raw.id)
     )
@@ -28,6 +30,8 @@ export class PrismaRecipientMapper {
       address: recipient.address,
       latitude: recipient.latitude,
       longitude: recipient.longitude,
+      createdAt: recipient.createdAt,
+      updatedAt: recipient.updatedAt,
     }
   }
 }

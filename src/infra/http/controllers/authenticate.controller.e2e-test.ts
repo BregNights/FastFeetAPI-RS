@@ -4,7 +4,7 @@ import { Test } from "@nestjs/testing"
 import { hash } from "bcryptjs"
 import request from "supertest"
 import { CourierFactory } from "test/factories/make-courier"
-import { DatabaseModule } from "../database/database.module"
+import { DatabaseModule } from "../../database/database.module"
 
 describe("Authenticate (E2E)", () => {
   let app: INestApplication
