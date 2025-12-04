@@ -44,7 +44,7 @@ model Package {
   trackingCode String                 @unique
   description  String?
   recipientId  String
-  courierId    String
+  courierId    String?
   status       PackageStatus          @default(WAITING)
   createdAt    DateTime               @default(now()) @map("created_at")
   updatedAt    DateTime?               @updatedAt @map("updated_at")
