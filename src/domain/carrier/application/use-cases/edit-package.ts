@@ -6,7 +6,7 @@ import { PackagesRepository } from "../repositories/packages-repository"
 
 interface EditPackageUseCaseRequest {
   packageId: string
-  data: Partial<Pick<PackageProps, "description" | "status">>
+  data: Partial<Pick<PackageProps, "description" | "status" | "courierId">>
 }
 
 type EditPackageUseCaseResponse = Either<
@@ -29,6 +29,7 @@ export class EditPackageUseCase {
 
     if (data.description) pkg.description = data.description
     if (data.status) pkg.status = data.status
+    if (data.courierId) pkg.courierId = data.courierId
 
     await this.packagesRepository.save(pkg)
 

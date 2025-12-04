@@ -14,7 +14,7 @@ export interface PackageProps {
   trackingCode: string
   description: string
   recipientId: UniqueEntityID
-  courierId: UniqueEntityID
+  courierId?: UniqueEntityID | null
   status: PackageStatus
   createdAt: Date
   updatedAt?: Date | null
@@ -41,6 +41,12 @@ export class Package extends AggregateRoot<PackageProps> {
 
   get courierId() {
     return this.props.courierId
+  }
+
+  set courierId(courierId: UniqueEntityID | null | undefined) {
+    this.updateProp(this.props.courierId, courierId, () => {
+      this.props.courierId = courierId
+    })
   }
 
   get status() {

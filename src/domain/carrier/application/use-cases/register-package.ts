@@ -7,7 +7,6 @@ import { PackagesRepository } from "../repositories/packages-repository"
 interface RegisterPackageUseCaseRequest {
   description: string
   recipientId: string
-  courierId: string
 }
 
 type RegisterPackageUseCaseResponse = Either<
@@ -24,12 +23,10 @@ export class RegisterPackageUseCase {
   async execute({
     description,
     recipientId,
-    courierId,
   }: RegisterPackageUseCaseRequest): Promise<RegisterPackageUseCaseResponse> {
     const pkg = Package.create({
       description,
       recipientId: new UniqueEntityID(recipientId),
-      courierId: new UniqueEntityID(courierId),
     })
 
     await this.packagesRepository.create(pkg)

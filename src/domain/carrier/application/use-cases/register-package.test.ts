@@ -17,7 +17,6 @@ describe("Create Package", () => {
 
   it("should be able register a package", async () => {
     const result = await sut.execute({
-      courierId: "1",
       description: "Package",
       recipientId: "2",
     })
