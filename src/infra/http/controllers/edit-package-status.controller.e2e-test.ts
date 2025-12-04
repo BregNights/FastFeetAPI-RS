@@ -35,7 +35,7 @@ describe("Edit package (E2E)", () => {
     await app.init()
   })
 
-  it("[PUT] /packages/:packageId/status", async () => {
+  it("[PATCH] /packages/:packageId/status", async () => {
     const user = await courierFactory.makePrismaCourier()
     const accessToken = jwt.sign({
       sub: user.id.toString(),
@@ -52,7 +52,7 @@ describe("Edit package (E2E)", () => {
     const pkgId = pkg.id.toString()
 
     const response = await request(app.getHttpServer())
-      .put(`/packages/${pkgId}/status`)
+      .patch(`/packages/${pkgId}/status`)
       .set("Authorization", `Bearer ${accessToken}`)
       .send({
         status: PackageStatus.PICKED_UP,
@@ -60,14 +60,14 @@ describe("Edit package (E2E)", () => {
 
     expect(response.statusCode).toBe(204)
 
-    const packageOnDatabase = await prisma.package.findFirst({
+    const packageOnDatabase = await prisma.package.findUnique({
       where: {
         id: pkgId,
       },
     })
 
-    console.log(packageOnDatabase)
-
-    expect(packageOnDatabase).toBeTruthy()
+    expect(packageOnDatabase).toEqual(
+      expect.objectContaining({ status: "PICKED_UP" })
+    )
   })
 })

@@ -1,9 +1,7 @@
 import { EditPackageStatusUseCase } from "@/domain/carrier/application/use-cases/edit-package-status"
-import { Role } from "@/domain/carrier/enterprise/entities/courier"
 import { PackageStatus } from "@/domain/carrier/enterprise/entities/package"
 import { CurrentUser } from "@/infra/auth/current-user-decorator"
 import type { UserPayload } from "@/infra/auth/jwt.strategy"
-import { Roles } from "@/infra/auth/role"
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe"
 import {
   BadRequestException,
@@ -11,14 +9,12 @@ import {
   Controller,
   HttpCode,
   Param,
-  Put,
+  Patch,
 } from "@nestjs/common"
 import { z } from "zod"
 
 const editPackageStatusBodySchema = z.object({
   status: z.enum(PackageStatus),
-  description: z.string().optional(),
-  courierId: z.string(),
 })
 
 type EditPackageStatusBodySchema = z.infer<typeof editPackageStatusBodySchema>
@@ -26,11 +22,11 @@ type EditPackageStatusBodySchema = z.infer<typeof editPackageStatusBodySchema>
 const bodyValidationPipe = new ZodValidationPipe(editPackageStatusBodySchema)
 
 @Controller("/packages/:packageId/status")
-@Roles(Role.COURIER)
+// @Roles(Role.COURIER)
 export class EditPackageStatusController {
   constructor(private editPackageStatus: EditPackageStatusUseCase) {}
 
-  @Put()
+  @Patch()
   @HttpCode(204)
   async handle(
     @Body(bodyValidationPipe) body: EditPackageStatusBodySchema,
