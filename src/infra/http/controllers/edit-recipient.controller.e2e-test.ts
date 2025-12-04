@@ -9,7 +9,7 @@ import { CourierFactory } from "test/factories/make-courier"
 import { RecipientFactory } from "test/factories/make-recipient"
 import { DatabaseModule } from "../../database/database.module"
 
-describe("Edit Recipient (E2E)", () => {
+describe("Edit recipient (E2E)", () => {
   let app: INestApplication
   let prisma: PrismaService
   let courierFactory: CourierFactory

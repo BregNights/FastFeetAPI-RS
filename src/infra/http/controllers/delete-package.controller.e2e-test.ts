@@ -11,7 +11,7 @@ import { PackageFactory } from "test/factories/make-package"
 import { RecipientFactory } from "test/factories/make-recipient"
 import { DatabaseModule } from "../../database/database.module"
 
-describe("Delete Package (E2E)", () => {
+describe("Delete package (E2E)", () => {
   let app: INestApplication
   let prisma: PrismaService
   let courierFactory: CourierFactory

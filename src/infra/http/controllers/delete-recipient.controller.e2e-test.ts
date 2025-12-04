@@ -8,7 +8,7 @@ import request from "supertest"
 import { CourierFactory } from "test/factories/make-courier"
 import { DatabaseModule } from "../../database/database.module"
 
-describe("Delete Recipient (E2E)", () => {
+describe("Delete recipient (E2E)", () => {
   let app: INestApplication
   let prisma: PrismaService
   let courierFactory: CourierFactory
