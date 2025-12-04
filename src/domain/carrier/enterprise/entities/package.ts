@@ -83,16 +83,9 @@ export class Package extends AggregateRoot<PackageProps> {
   }
 
   private static generateTrackingCode(): string {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    const prefix =
-      letters[Math.floor(Math.random() * letters.length)] +
-      letters[Math.floor(Math.random() * letters.length)]
-
     const numbers = Math.floor(100000000 + Math.random() * 900000000)
 
-    const suffix = "BR"
-
-    return `${prefix}${numbers}${suffix}`
+    return `PKG-${numbers}`
   }
 
   static create(

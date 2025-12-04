@@ -6,7 +6,9 @@ export class PrismaPackageMapper {
   static toDomain(raw: PrismaPackage): Package {
     return Package.create(
       {
-        courierId: new UniqueEntityID(raw.courierId),
+        courierId: raw.courierId
+          ? new UniqueEntityID(raw.courierId)
+          : undefined,
         description: raw.description ?? "",
         recipientId: new UniqueEntityID(raw.recipientId),
         trackingCode: raw.trackingCode,
@@ -20,7 +22,7 @@ export class PrismaPackageMapper {
   static toPrisma(pkg: Package): Prisma.PackageUncheckedCreateInput {
     return {
       id: pkg.id.toString(),
-      courierId: pkg.courierId.toString(),
+      courierId: pkg.courierId?.toString() ?? null,
       description: pkg.description ?? "",
       recipientId: pkg.recipientId.toString(),
       trackingCode: pkg.trackingCode,

@@ -7,7 +7,7 @@ export class PackagePresenter {
       trackingCode: pkg.trackingCode,
       description: pkg.description,
       recipientId: pkg.recipientId.toString(),
-      courierId: pkg.courierId.toString(),
+      courierId: pkg.courierId?.toString() ?? null,
       status: pkg.status,
       createdAt: pkg.createdAt,
       updatedAt: pkg.updatedAt,
