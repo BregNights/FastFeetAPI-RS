@@ -8,7 +8,7 @@ import request from "supertest"
 import { CourierFactory } from "test/factories/make-courier"
 import { DatabaseModule } from "../../database/database.module"
 
-describe("Edit package (E2E)", () => {
+describe("Edit courier (E2E)", () => {
   let app: INestApplication
   let prisma: PrismaService
   let courierFactory: CourierFactory
@@ -49,7 +49,7 @@ describe("Edit package (E2E)", () => {
 
     expect(response.statusCode).toBe(204)
 
-    const courierOnDatabase = await prisma.user.findFirst({
+    const courierOnDatabase = await prisma.user.findUnique({
       where: {
         id: userId,
       },
