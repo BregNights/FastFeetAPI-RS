@@ -10,7 +10,7 @@ import {
   Query,
 } from "@nestjs/common"
 import { z } from "zod"
-import { PackagePresenter } from "../presenters/package-presenter"
+import { PackageWithRecipientPresenter } from "../presenters/package-with-recipient-presenter"
 
 const pageQueryParamSchema = z
   .string()
@@ -46,6 +46,6 @@ export class FetchPackagesByCourierController {
 
     const pkgs = result.value.pkgs
 
-    return { package: pkgs.map(PackagePresenter.toHTTP) }
+    return { package: pkgs.map(PackageWithRecipientPresenter.toHTTP) }
   }
 }
