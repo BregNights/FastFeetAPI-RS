@@ -44,11 +44,12 @@ export class PrismaPackagesRepository implements PackagesRepository {
   async findManyPackagesByCourierId(
     courierId: string,
     page: number
-  ): Promise<Package[]> {
+  ): Promise<PackageDetails[]> {
     const packages = await this.prisma.package.findMany({
       where: {
         courierId,
       },
+      include: { recipient: true },
       take: 20,
       skip: (page - 1) * 20,
       orderBy: {
@@ -56,7 +57,7 @@ export class PrismaPackagesRepository implements PackagesRepository {
       },
     })
 
-    return packages.map(PrismaPackageMapper.toDomain)
+    return packages.map(PrismaPackageDetailsMapper.toDomain)
   }
 
   async save(pkg: Package): Promise<void> {
