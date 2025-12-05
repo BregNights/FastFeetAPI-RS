@@ -1,4 +1,4 @@
-import { FetchPackagesUseCase } from "@/domain/carrier/application/use-cases/fetch-packages"
+import { FetchPackagesByCourierUseCase } from "@/domain/carrier/application/use-cases/fetch-packages-by-courier"
 import { CurrentUser } from "@/infra/auth/current-user-decorator"
 import type { UserPayload } from "@/infra/auth/jwt.strategy"
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation-pipe"
@@ -24,8 +24,8 @@ type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>
 const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema)
 
 @Controller("/packages/:courierId")
-export class FetchPackagesController {
-  constructor(private fetchPackage: FetchPackagesUseCase) {}
+export class FetchPackagesByCourierController {
+  constructor(private fetchPackageByCourier: FetchPackagesByCourierUseCase) {}
 
   @Get()
   async handle(
@@ -33,7 +33,7 @@ export class FetchPackagesController {
     @CurrentUser() user: UserPayload,
     @Param("courierId") courierId: string
   ) {
-    const result = await this.fetchPackage.execute({
+    const result = await this.fetchPackageByCourier.execute({
       page,
       courierId,
       requesterId: user.sub,
