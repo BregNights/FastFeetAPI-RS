@@ -3,6 +3,7 @@ import { DeleteCourierUseCase } from "@/domain/carrier/application/use-cases/del
 import { DeletePackageUseCase } from "@/domain/carrier/application/use-cases/delete-package"
 import { DeleteRecipientUseCase } from "@/domain/carrier/application/use-cases/delete-recipient"
 import { EditCourierUseCase } from "@/domain/carrier/application/use-cases/edit-courier"
+import { EditCourierPasswordUseCase } from "@/domain/carrier/application/use-cases/edit-courier-password"
 import { EditPackageUseCase } from "@/domain/carrier/application/use-cases/edit-package"
 import { EditPackageStatusUseCase } from "@/domain/carrier/application/use-cases/edit-package-status"
 import { EditRecipientUseCase } from "@/domain/carrier/application/use-cases/edit-recipient"
@@ -19,6 +20,7 @@ import { AuthenticateController } from "./controllers/authenticate.controller"
 import { DeleteAccountController } from "./controllers/delete-account.controller"
 import { DeletePackageController } from "./controllers/delete-package.controller"
 import { DeleteRecipientController } from "./controllers/delete-recipient.controller"
+import { EditCourierPasswordController } from "./controllers/edit-courier-password.controller"
 import { EditCourierController } from "./controllers/edit-courier.controller"
 import { EditPackageStatusController } from "./controllers/edit-package-status.controller"
 import { EditPackageController } from "./controllers/edit-package.controller"
@@ -47,6 +49,7 @@ import { RegisterRecipientController } from "./controllers/register-recipient.co
     FetchPackagesByCourierController,
     FetchCouriersController,
     FetchRecipientsController,
+    EditCourierPasswordController,
   ],
   providers: [
     RegisterCourierUseCase,
@@ -63,6 +66,7 @@ import { RegisterRecipientController } from "./controllers/register-recipient.co
     FetchPackagesByCourierUseCase,
     FetchCouriersUseCase,
     FetchRecipientsUseCase,
+    EditCourierPasswordUseCase,
   ],
 })
 export class HttpModule {}
