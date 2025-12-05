@@ -9,7 +9,7 @@ export abstract class PackagesRepository {
   abstract findManyPackagesByCourierId(
     courierId: string,
     page: number
-  ): Promise<Package[]>
+  ): Promise<PackageDetails[]>
   abstract save(pkg: Package): Promise<void>
   abstract delete(pkg: Package): Promise<void>
 }
