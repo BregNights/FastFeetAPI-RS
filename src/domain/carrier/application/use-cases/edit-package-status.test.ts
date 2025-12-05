@@ -17,7 +17,8 @@ describe("Update status package", () => {
   beforeEach(() => {
     inMemoryRecipientsRepository = new InMemoryRecipientsRepository()
     inMemoryPackagesRepository = new InMemoryPackagesRepository(
-      inMemoryRecipientsRepository
+      inMemoryRecipientsRepository,
+      inMemoryCouriersRepository
     )
     inMemoryCouriersRepository = new InMemoryCouriersRepository()
     sut = new EditPackageStatusUseCase(
