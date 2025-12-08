@@ -1,5 +1,5 @@
 import {
-  FindManyNearbyParams,
+  FindManyNearbyCourierParams,
   RecipientsRepository,
 } from "@/domain/carrier/application/repositories/recipients-repository"
 import { Recipient } from "@/domain/carrier/enterprise/entities/recipient"
@@ -32,10 +32,33 @@ export class PrismaRecipientsRepository implements RecipientsRepository {
   async findManyNearby({
     latitude,
     longitude,
-  }: FindManyNearbyParams): Promise<Recipient[]> {
+  }: FindManyNearbyCourierParams): Promise<Recipient[]> {
     const recipients = await this.prisma.$queryRaw<Recipient[]>`
     SELECT * from recipients
     WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10`
+
+    return recipients
+  }
+
+  async findManyRecipientsNearbyCourier(
+    courierId: string,
+    params: FindManyNearbyCourierParams
+  ): Promise<Recipient[]> {
+    const recipients = await this.prisma.$queryRaw<Recipient[]>`
+    SELECT r.*
+    FROM recipients r
+    JOIN packages p ON p."recipientId" = r.id
+    WHERE p."courierId" = ${courierId}
+      AND (
+        6371 * acos(
+          cos(radians(${params.latitude}))
+          * cos(radians(r.latitude))
+          * cos(radians(r.longitude) - radians(${params.longitude}))
+          + sin(radians(${params.latitude}))
+          * sin(radians(r.latitude))
+        )
+      ) <= 10
+  `
 
     return recipients
   }

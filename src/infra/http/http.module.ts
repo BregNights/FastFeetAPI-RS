@@ -8,6 +8,7 @@ import { EditPackageUseCase } from "@/domain/carrier/application/use-cases/edit-
 import { EditPackageStatusUseCase } from "@/domain/carrier/application/use-cases/edit-package-status"
 import { EditRecipientUseCase } from "@/domain/carrier/application/use-cases/edit-recipient"
 import { FetchCouriersUseCase } from "@/domain/carrier/application/use-cases/fetch-couriers"
+import { FetchNearbyRecipientsUseCase } from "@/domain/carrier/application/use-cases/fetch-nearby-recipients"
 import { FetchPackagesByCourierUseCase } from "@/domain/carrier/application/use-cases/fetch-packages-by-courier"
 import { FetchRecipientsUseCase } from "@/domain/carrier/application/use-cases/fetch-recipients"
 import { RegisterCourierUseCase } from "@/domain/carrier/application/use-cases/register-courier"
@@ -27,6 +28,7 @@ import { EditPackageController } from "./controllers/edit-package.controller"
 import { EditRecipientController } from "./controllers/edit-recipient.controller"
 import { FetchCouriersController } from "./controllers/fetch-couriers.controller"
 import { FetchPackagesByCourierController } from "./controllers/fetch-packages-by-courier.controller"
+import { FetchRecipientsNearbyCourierController } from "./controllers/fetch-recipients-nearby-courier.controller"
 import { FetchRecipientsController } from "./controllers/fetch-recipients.controller"
 import { RegisterAccountController } from "./controllers/register-account.controller"
 import { RegisterPackageController } from "./controllers/register-package.controller"
@@ -50,6 +52,7 @@ import { RegisterRecipientController } from "./controllers/register-recipient.co
     FetchCouriersController,
     FetchRecipientsController,
     EditCourierPasswordController,
+    FetchRecipientsNearbyCourierController,
   ],
   providers: [
     RegisterCourierUseCase,
@@ -67,6 +70,7 @@ import { RegisterRecipientController } from "./controllers/register-recipient.co
     FetchCouriersUseCase,
     FetchRecipientsUseCase,
     EditCourierPasswordUseCase,
+    FetchNearbyRecipientsUseCase,
   ],
 })
 export class HttpModule {}
