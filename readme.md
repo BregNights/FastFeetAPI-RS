@@ -23,19 +23,30 @@ Deletar destinatário
 
 
 Couriers (Entregadores)
+
 Registrar courier
+
 Listar todos os couriers
+
 Editar courier
+
 Alterar somente a senha do courier
+
 Deletar courier
+
 Autenticar (courier/admin) via JWT
 
 
 Packages (Pacotes)
+
 Registrar um pacote para um recipient
+
 Listar todos os pacotes associados a um courier
+
 Editar pacote
+
 Atualizar somente o status do pacote (rota disponível para couriers)
+
 Deletar pacote
 
 
