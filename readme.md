@@ -10,10 +10,15 @@ A API permite gerenciar todo o fluxo operacional de uma transportadora (assim es
 
 
 Recipients (Destinatários)
+
 Registrar destinatário
+
 Listar todos os destinatários
+
 Listar destinatários próximos a um courier (com base em coordenadas geográficas)
+
 Editar destinatário
+
 Deletar destinatário
 
 
