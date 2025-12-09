@@ -9,7 +9,7 @@ O projeto foi estruturado de forma didática, com foco em clareza, boas prática
 A API permite gerenciar todo o fluxo operacional de uma transportadora (assim espero...):
 
 
-Recipients (Destinatários)
+### Recipients (Destinatários)
 
 Registrar destinatário
 
@@ -22,7 +22,7 @@ Editar destinatário
 Deletar destinatário
 
 
-Couriers (Entregadores)
+### Couriers (Entregadores)
 
 Registrar courier
 
@@ -37,7 +37,7 @@ Deletar courier
 Autenticar (courier/admin) via JWT
 
 
-Packages (Pacotes)
+### Packages (Pacotes)
 
 Registrar um pacote para um recipient
 
