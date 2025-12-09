@@ -10,7 +10,6 @@ A API permite gerenciar todo o fluxo operacional de uma transportadora (assim es
 
 
 ### Recipients (Destinatários)
-
 Registrar destinatário
 
 Listar todos os destinatários
@@ -23,7 +22,6 @@ Deletar destinatário
 
 
 ### Couriers (Entregadores)
-
 Registrar courier
 
 Listar todos os couriers
@@ -38,7 +36,6 @@ Autenticar (courier/admin) via JWT
 
 
 ### Packages (Pacotes)
-
 Registrar um pacote para um recipient
 
 Listar todos os pacotes associados a um courier
@@ -52,7 +49,6 @@ Deletar pacote
 
 ## Endpoints
 ### Recipients
-
 POST   /recipients                    - registrar recipient    - admin
 
 GET    /recipients                    - listar todos             - admin
@@ -65,7 +61,6 @@ DELETE /recipients/:id                - deletar recipient           - admin
 
 
 ### Packages
-
 POST   /packages/:recipientId         - registrar pacote            - admin
 
 GET    /packages/:courierId           - listar pacotes do courier   - courier
@@ -78,7 +73,6 @@ DELETE /packages/:id                  - deletar pacote              - admin
 
 
 ### Couriers
-
 POST   /accounts                      - registrar courier           - admin
 
 GET    /couriers                      - listar couriers             - admin
@@ -91,7 +85,6 @@ DELETE /accounts/:id                  - deletar courier             - admin
 
 
 ### Autenticação
-
 POST /sessions                        - autenticação            courier/admin
 
 
