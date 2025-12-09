@@ -53,15 +53,15 @@ Deletar pacote
 ## Endpoints
 ### Recipients
 
-POST   /recipients                    - registrar recipient    
+POST   /recipients                    - registrar recipient    - admin
 
-GET    /recipients                    - listar todos             
+GET    /recipients                    - listar todos             - admin
 
-GET    /recipients/nearby             - listar destinatários próximos 
+GET    /recipients/nearby             - listar destinatários próximos - courier
 
-PATCH  /recipients/:recipientId       - editar recipient            
+PATCH  /recipients/:recipientId       - editar recipient            - admin
 
-DELETE /recipients/:id                - deletar recipient           
+DELETE /recipients/:id                - deletar recipient           - admin
 
 
 ### Packages
@@ -90,20 +90,27 @@ PATCH  /couriers/:courierId/password  - alterar senha               - admin
 DELETE /accounts/:id                  - deletar courier             - admin
 
 
-Autenticação
+### Autenticação
+
 POST /sessions                        - autenticação            courier/admin
 
 
-Arquitetura do Projeto
+## Arquitetura do Projeto
 Este projeto segue uma estrutura inspirada em DDD (Domain-Driven Design) e Clean Architecture, garantindo separação clara entre camadas e facilitando testes, manutenção e evolução.
 
-Principais conceitos utilizados:
+### Principais conceitos utilizados:
 Domínio isolado com entidades, agregados e value-objects
+
 Domain Events para reações automáticas no fluxo interno
+
 Repositórios desacoplados por meio de abstrações
+
 Mappers para conversão entre domínio ↔ persistência
+
 Use Cases organizando a lógica de aplicação
+
 Controllers lidando apenas com entrada/saída HTTP
+
 Validação com Zod garantindo segurança na entrada de dados
 
 Essa organização foi escolhida para tornar o projeto mais legível e didático, reforçando boas práticas avançadas de backend.
