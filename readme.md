@@ -1,4 +1,4 @@
-FastFeetAPI
+# FastFeetAPI
 A FastFeetAPI é uma API desenvolvida para simular o funcionamento de uma transportadora, permitindo o gerenciamento completo de destinatários (recipients), transportadores (couriers) e pacotes (packages).
 O objetivo principal deste projeto é aperfeiçoar habilidades com NestJS, arquitetura limpa, Domain-Driven Design, autenticação JWT e práticas modernas de desenvolvimento backend.
 O projeto foi estruturado de forma didática, com foco em clareza, boas práticas e organização, facilitando tanto o aprendizado quanto a evolução contínua.
@@ -124,9 +124,9 @@ pnpm i
 
 3. Configure o arquivo .env
 Exemplo:
-# Banco de dados (Prisma)
+Banco de dados (Prisma)
 DATABASE_URL="postgresql://postgres:docker@localhost:5432/fast-feet?schema=public"
-# JWT
+JWT
 JWT_PRIVATE_KEY=  
 JWT_PUBLIC_KEY=
 
@@ -145,11 +145,10 @@ Produção:
 pnpm run start:prod
 
 
-Autenticação
+Autenticação:
 A API utiliza JWT assimétrico (chaves pública/privada).
 
 Roles existentes:
-admin
-courier
+admin, courier
 
 Algumas rotas aceitam apenas couriers (ex: atualizar status do pacote).
