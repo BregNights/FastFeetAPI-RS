@@ -109,36 +109,52 @@ Validação com Zod garantindo segurança na entrada de dados
 Essa organização foi escolhida para tornar o projeto mais legível e didático, reforçando boas práticas avançadas de backend.
 
 
-Tecnologias Utilizadas
-Backend:
+## Tecnologias Utilizadas
+### Backend:
 NestJS
+
 Prisma ORM
+
 PostgreSQL
+
 Docker
+
 JWT (Autenticação)
+
 Zod (validação de schemas)
+
 Presenters
+
 bcryptjs
+
 Domain Events
+
 DDD + Clean Architecture
 
-Testes:
+### Testes:
 Vitest
+
 Supertest
+
 Faker.js
 
-Ferramentas auxiliares:
+### Ferramentas auxiliares:
 dotenv
+
 ts-node
+
 TypeScript
+
 SWC
 
 
-O projeto possui testes:
-unitários
+### Testes:
+Unitários
+
 E2E (integrados)
 
-Comando para testes:
+
+### Comando para testes:
 Rodar testes unitários:
 npm run test
 
@@ -146,7 +162,7 @@ Rodar testes E2E:
 npm run test:e2e
 
 
-Como Rodar o Projeto
+## Como Rodar o Projeto
 1. Clone o repositório
 git clone https://github.com/BregNights/FastFeetAPI-RS.git
 cd FastFeetAPI
@@ -155,12 +171,7 @@ cd FastFeetAPI
 pnpm i
 
 3. Configure o arquivo .env
-Exemplo:
-Banco de dados (Prisma)
-DATABASE_URL="postgresql://postgres:docker@localhost:5432/fast-feet?schema=public"
-JWT
-JWT_PRIVATE_KEY=  
-JWT_PUBLIC_KEY=
+siga o env.example do projeto
 
 4. Suba o banco de dados via Docker
 docker compose up -d
@@ -170,17 +181,17 @@ pnpm prisma migrate dev
 
 6. Inicie o servidor
 
-Modo desenvolvimento:
+### Modo desenvolvimento:
 pnpm run start:dev
 
-Produção:
+### Produção:
 pnpm run start:prod
 
 
-Autenticação:
+### Autenticação:
 A API utiliza JWT assimétrico (chaves pública/privada).
 
-Roles existentes:
+### Roles existentes:
 admin, courier
 
 Algumas rotas aceitam apenas couriers (ex: atualizar status do pacote).
