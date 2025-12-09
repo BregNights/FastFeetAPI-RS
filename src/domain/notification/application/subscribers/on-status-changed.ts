@@ -3,7 +3,9 @@ import { EventHandler } from "@/core/events/event-handler"
 import { PackagesRepository } from "@/domain/carrier/application/repositories/packages-repository"
 import { PackageStatusEvent } from "@/domain/carrier/enterprise/events/package-status-event"
 import { SendNotificationUseCase } from "@/domain/notification/application/use-cases/send-notification"
+import { Injectable } from "@nestjs/common"
 
+@Injectable()
 export class OnStatusChanged implements EventHandler {
   constructor(
     private packagesRepository: PackagesRepository,
@@ -20,7 +22,7 @@ export class OnStatusChanged implements EventHandler {
   }
 
   private async sendStatusChangedNotification({ pkg }: PackageStatusEvent) {
-    const result = await this.packagesRepository.findDetailsById(
+    const result = await this.packagesRepository.findById(
       pkg.id.toString()
     )
 
