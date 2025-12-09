@@ -15,13 +15,13 @@ let sut: FetchNearbyRecipientsUseCase
 describe("Fetch Nearby Recipients Use Case", () => {
   beforeEach(() => {
     inMemoryCouriersRepository = new InMemoryCouriersRepository()
-    inMemoryRecipientsRepository = new InMemoryRecipientsRepository(
-      inMemoryCouriersRepository,
-      inMemoryPackagesRepository
-    )
     inMemoryPackagesRepository = new InMemoryPackagesRepository(
       inMemoryCouriersRepository,
       inMemoryRecipientsRepository
+    )
+    inMemoryRecipientsRepository = new InMemoryRecipientsRepository(
+      inMemoryCouriersRepository,
+      inMemoryPackagesRepository
     )
 
     sut = new FetchNearbyRecipientsUseCase(inMemoryRecipientsRepository)
@@ -86,7 +86,7 @@ describe("Fetch Nearby Recipients Use Case", () => {
     ])
   })
 
-  it.only("should not be able to fetch nearby recipients from another courier", async () => {
+  it("should not be able to fetch nearby recipients from another courier", async () => {
     const courier = makeCourier()
     inMemoryCouriersRepository.items.push(courier)
 
