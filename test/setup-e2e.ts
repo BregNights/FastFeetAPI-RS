@@ -33,7 +33,9 @@ beforeAll(async () => {
 
   DomainEvents.shouldRun = false
 
-  execSync("pnpm prisma migrate deploy")
+  const result = execSync("pnpm prisma migrate deploy")
+
+  console.log(result.toString())
 })
 
 afterAll(async () => {
