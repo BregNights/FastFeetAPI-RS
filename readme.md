@@ -50,28 +50,43 @@ Atualizar somente o status do pacote (rota disponível para couriers)
 Deletar pacote
 
 
-📡 Endpoints                          Descrição                     Role
-Recipients
-POST   /recipients                    - registrar recipient         - admin  
-GET    /recipients                    - listar todos                - admin
-GET    /recipients/nearby             - listar destinatários próximos - courier
-PATCH  /recipients/:recipientId       - editar recipient            - admin
-DELETE /recipients/:id                - deletar recipient           - admin
+## Endpoints
+### Recipients
+
+POST   /recipients                    - registrar recipient    
+
+GET    /recipients                    - listar todos             
+
+GET    /recipients/nearby             - listar destinatários próximos 
+
+PATCH  /recipients/:recipientId       - editar recipient            
+
+DELETE /recipients/:id                - deletar recipient           
 
 
-Packages
+### Packages
+
 POST   /packages/:recipientId         - registrar pacote            - admin
+
 GET    /packages/:courierId           - listar pacotes do courier   - courier
+
 PATCH  /packages/:packageId           - editar pacote               - admin
+
 PATCH  /packages/:packageId/status    - atualizar status            - courier 
+
 DELETE /packages/:id                  - deletar pacote              - admin
 
 
-Couriers
+### Couriers
+
 POST   /accounts                      - registrar courier           - admin
+
 GET    /couriers                      - listar couriers             - admin
+
 PATCH  /couriers/:courierId           - editar courier              - admin
+
 PATCH  /couriers/:courierId/password  - alterar senha               - admin
+
 DELETE /accounts/:id                  - deletar courier             - admin
 
 
